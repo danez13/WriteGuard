@@ -36,7 +36,7 @@ if exist "%WINDIR%\system32\uwfmgr.exe" (
     break > config.txt
 )
 setlocal EnableDelayedExpansion
-choice /C FVFX /M "Do you want to see the filter menu, volume menu, File Exclusion menu, or exit?"
+choice /C FVEX /M "Do you want to see the filter menu, volume menu, File Exclusion menu, or exit?"
 if %errorlevel% equ 1 (
     cls
     goto :filterMenu
@@ -45,7 +45,7 @@ if %errorlevel% equ 2 (
     cls
     goto :volumeMenu
 )
-if %errorlevel% equ 3(
+if %errorlevel% equ 3 (
     cls
     goto :fileMenu
 )
@@ -82,6 +82,43 @@ if %errorlevel% equ 3 (
     goto :exit
 )
 if %errorlevel% equ 4 (
+    cls
+    goto :start
+)
+
+:volumeMenu
+choice /C PUSRB /M "Do you want to protect a volume, unprotect a volume, view volume config, reboot, or go back to the start menu?"
+if %errorlevel% equ 1 ( 
+    goto :protect
+)
+if %errorlevel% equ 2 ( 
+    goto :unprotect
+)
+if %errorlevel% equ 3 ( 
+    if exist "%WINDIR%\system32\uwfmgr.exe" (
+        goto :displayvolumes  
+    ) else (
+        echo "please enable Unified Write Filter"
+        pause
+        goto :volumeMenu
+    ) 
+)
+if %errorlevel% equ 4 (
+    cls
+    shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
+    goto :exit
+)
+if %errorlevel% equ 5 (
+    cls 
+    goto :start 
+)
+
+:fileMenu
+choice /C GB /M "do you want to Get volume exclusions, or go back to the start Menu"
+if %errorlevel% equ 1 (
+    goto :getExclusions
+)
+if %errorlevel% equ 2 (
     cls
     goto :start
 )
@@ -127,34 +164,6 @@ endlocal
 cls
 goto :filterMenu
 
-:volumeMenu
-choice /C PUSRB /M "Do you want to protect a volume, unprotect a volume, view volume config, reboot, or go back to the start menu?"
-if %errorlevel% equ 1 ( 
-    goto :protect
-)
-if %errorlevel% equ 2 ( 
-    goto :unprotect
-)
-if %errorlevel% equ 3 ( 
-    if exist "%WINDIR%\system32\uwfmgr.exe" (
-        uwfmgr volume Get-Config
-        pause
-        goto :volumeMenu  
-    ) else (
-        echo "please enable Unified Write Filter"
-        pause
-        goto :volumeMenu .
-    ) 
-)
-if %errorlevel% equ 4 (
-    cls
-    shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
-    goto :exit
-)
-if %errorlevel% equ 5 ( 
-    goto :start 
-)
-
 :protect
 powershell -command "Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{Name='Size(GB)';Expression={[math]::round($_.Used/1GB,2)}}, @{Name='Free Space(GB)';Expression={[math]::round($_.Free/1GB,2)}}"
 set /p drive="Enter the drive letter (e.g., C): "
@@ -185,9 +194,24 @@ if exist %drive%:\ (
     goto :volumeMenu
 )
 
-:fileMenu
-pause
-goto :start
+@REM :displayvolumes
+@REM choice /C 1A /M "do you want to display one or all volumes"
+@REM if %errorlevel% equ 1 (
+
+@REM )
+@REM if %errorlevel% equ 2 (
+
+@REM )
+
+:getExclusions
+@REM powershell -command "Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{Name='Size(GB)';Expression={[math]::round($_.Used/1GB,2)}}, @{Name='Free Space(GB)';Expression={[math]::round($_.Free/1GB,2)}}"
+@REM set /p drive="Enter the drive letter (e.g., C): "
+@REM if exist %drive%:\ (
+@REM     uwfmgr file get-Exclusions %drive%:
+@REM     pause
+@REM     cls
+@REM     goto :fileMenu
+@REM )
 
 :exit
 exit
