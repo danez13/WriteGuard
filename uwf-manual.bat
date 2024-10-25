@@ -36,7 +36,7 @@ if exist "%WINDIR%\system32\uwfmgr.exe" (
     break > config.txt
 )
 setlocal EnableDelayedExpansion
-choice /C FVX /M "Do you want to see the filter menu, volume menu, or exit?"
+choice /C FVFX /M "Do you want to see the filter menu, volume menu, File Exclusion menu, or exit?"
 if %errorlevel% equ 1 (
     cls
     goto :filterMenu
@@ -45,7 +45,11 @@ if %errorlevel% equ 2 (
     cls
     goto :volumeMenu
 )
-if %errorlevel% equ 3 (
+if %errorlevel% equ 3(
+    cls
+    goto :fileMenu
+)
+if %errorlevel% equ 4 (
     goto :exit
 )
 endlocal
@@ -177,9 +181,13 @@ if exist %drive%:\ (
 ) else (
     echo The drive %drive%: does not exist.
     pause
-    clas
+    cls
     goto :volumeMenu
 )
+
+:fileMenu
+pause
+goto :start
 
 :exit
 exit
