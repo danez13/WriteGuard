@@ -30,25 +30,31 @@ if '%errorlevel%' NEQ '0' (
 :--------------------------------------
 
 :start
-if exist "%WINDIR%\system32\uwfmgr" START uwfmgr get-config > config.txt else echo > config.txt
+if exist "%WINDIR%\system32\uwfmgr.exe" (
+    uwfmgr get-config > config.txt 
+) else (
+    break > config.txt
+)
 setlocal EnableDelayedExpansion
-choice /C FX /M "Do you want to see the filter menu, or exit?"
+choice /C FVX /M "Do you want to see the filter menu, volume menu, or exit?"
 if %errorlevel% equ 1 (
     cls
     goto :filterMenu
 )
 if %errorlevel% equ 2 (
+    cls
+    goto :volumeMenu
+)
+if %errorlevel% equ 3 (
     goto :exit
 )
 endlocal
 
 :filterMenu
-choice /C EDB /M "Do you want to Enable UWF, Disable UWF, or return back to the start menu?"
+choice /C EDRB /M "Do you want to Enable UWF, Disable UWF, Reboot, or return back to the start menu?"
 if %errorlevel% equ 1 (
     findstr /C:"Filter state:     ON" config.txt > temp.txt
-    set size=0
-    for /f %%i in ("config.txt") do set size=%%~zi
-    if %size% gtr equ 0 (
+    if errorlevel 1 (
         uwfmgr filter enable
         pause
         cls
@@ -63,10 +69,15 @@ if %errorlevel% equ 2 (
         uwfmgr filter disable
         pause
         cls
-        goto :start
+        goto :filterMenu
     )
 )
 if %errorlevel% equ 3 (
+    cls
+    shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
+    goto :exit
+)
+if %errorlevel% equ 4 (
     cls
     goto :start
 )
@@ -107,11 +118,68 @@ findstr /C:"Filter state:     OFF" config.txt > nul
 if errorlevel 1 (
     uwfmgr filter enable
 )
-
 pause
 endlocal
 cls
 goto :filterMenu
+
+:volumeMenu
+choice /C PUSRB /M "Do you want to protect a volume, unprotect a volume, view volume config, reboot, or go back to the start menu?"
+if %errorlevel% equ 1 ( 
+    goto :protect
+)
+if %errorlevel% equ 2 ( 
+    goto :unprotect
+)
+if %errorlevel% equ 3 ( 
+    if exist "%WINDIR%\system32\uwfmgr.exe" (
+        uwfmgr volume Get-Config
+        pause
+        goto :volumeMenu  
+    ) else (
+        echo "please enable Unified Write Filter"
+        pause
+        goto :volumeMenu .
+    ) 
+)
+if %errorlevel% equ 4 (
+    cls
+    shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
+    goto :exit
+)
+if %errorlevel% equ 5 ( 
+    goto :start 
+)
+
+:protect
+powershell -command "Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{Name='Size(GB)';Expression={[math]::round($_.Used/1GB,2)}}, @{Name='Free Space(GB)';Expression={[math]::round($_.Free/1GB,2)}}"
+set /p drive="Enter the drive letter (e.g., C): "
+if exist %drive%:\ (
+    uwfmgr volume protect %drive%:
+    pause
+    cls
+    goto :volumeMenu
+) else (
+    echo The drive %drive%: does not exist.
+    pause
+    cls
+    goto :volumeMenu
+)
+
+:unprotect
+powershell -command "Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{Name='Size(GB)';Expression={[math]::round($_.Used/1GB,2)}}, @{Name='Free Space(GB)';Expression={[math]::round($_.Free/1GB,2)}}"
+set /p drive="Enter the drive letter (e.g., C): "
+if exist %drive%:\ (
+    uwfmgr volume Unprotect %drive%:
+    pause
+    cls
+    goto :volumeMenu
+) else (
+    echo The drive %drive%: does not exist.
+    pause
+    clas
+    goto :volumeMenu
+)
 
 :exit
 exit
