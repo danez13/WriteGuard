@@ -29,53 +29,93 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 :--------------------------------------
 
-setlocal enabledelayedexpansion
-set "searchString=Enabled"
-choice /C EDRX /M "Do you want to Enable UWF, Disable UWF, Reboot the system, or exit?"
+:start
+uwfmgr get-config > config.txt
+setlocal EnableDelayedExpansion
+choice /C FX /M "Do you want to see the filter menu, or exit?"
 if %errorlevel% equ 1 (
-    choice /c YN /M "are you sure you want to enable UWF"
-    if %errorlevel% equ 2 (
-        :: echo determining if Device Lockdown feature is enabled...
-        for /f "delims=" %%i in ('Dism /online /Get-Features /format:table ^| find "Client-DeviceLockdown"') do (
-            set "output=!output! %%i"
-        )
-        echo !output! > temp.txt
+    cls
+    goto :filterMenu
+)
+if %errorlevel% equ 2 (
+    goto :exit
+)
+endlocal
 
-        findstr /C:"%searchString%" temp.txt > nul
-
-        if %errorlevel% equ 1 (
-            echo enabling Device Lockdown feature...
-            DISM /Online /Enable-Feature /FeatureName:Client-DeviceLockdown
-        ) else (
-            echo Device Lockdown is enabled
-        )
-
-        @REM echo determining if Unified Write Filter feature is enabled...
-        for /f "delims=" %%i in ('Dism /online /Get-Features /format:table ^| find "Client-UnifiedWriteFilter"') do (
-            set "output=!output! %%i"
-        )
-        echo !output! > temp.txt
-
-        findstr /C:"%searchString%" temp.txt > nul
-
-        if %errorlevel% equ 1 (
-            echo enabling Unified Write Filter feature...
-            DISM /Online /Enable-Feature /FeatureName:Client-UnifiedWriteFilter
-        ) else (
-            echo Unified Write Filter feature is enabled
-        )
-    ) else if %errorlevel% equ 3 (
-        call uwf-manual.bat
-        exit /b
+:filterMenu
+choice /C EDRB /M "Do you want to Enable UWF, Disable UWF, or return back to the start menu?"
+if %errorlevel% equ 1 (
+    findstr /C:"Filter state:     ON" config.txt > nul
+    if %errorlevel% equ 1 (
+        uwfmgr filter enable
+        pause
+        cls
+        goto :filterMenu
+    ) else (
+        goto :EnableClient-Features
     )
-) else if errorlevel 2 (
-    echo 2
+)
+if %errorlevel% equ 2 (
+    findstr /C:"Filter state:     OFF" config.txt > nul
+    if errorlevel 1 (
+        uwfmgr filter disable
+        pause
+        cls
+        goto :start
+    )
 )
 if errorlevel 3 (
-    echo 3
+    uwfmgr filter Reset-Settings
+    pause
+    cls
+    goto :start
 )
-if errorlevel 4 (
-    echo 4
+if %errorlevel% equ 4 (
+    cls
+    goto :start
 )
-del temp.txt
+
+:EnableClient-Features
+choice /C YN /M "are you sure you want to enable UWF?"
+if %errorlevel% equ 1 (
+    goto :EnableFeatures 
+) else (
+    cls
+    goto :filterMenu
+)
+
+:EnableFeatures
+setlocal
+Dism /online /Get-Features /format:table | find "Client-DeviceLockdown" > temp.txt
+findstr /C:"Enabled" temp.txt > nul
+if errorlevel 1 (
+    echo enabling Device Lockdown feature...
+    DISM /Online /Enable-Feature /FeatureName:Client-DeviceLockdown
+) else (
+    echo Device Lockdown is enabled
+)
+
+Dism /online /Get-Features /format:table | find "Client-UnifiedWriteFilter" > temp.txt
+
+findstr /C:"Enabled" temp.txt > nul
+
+if errorlevel 1 (
+    echo enabling Unified Write Filter...
+    DISM /Online /Enable-Feature /FeatureName:Client-UnifiedWriteFilter
+) else (
+    echo Unified Write Filter is enabled
+)
+
+findstr /C:"Filter state:     OFF" config.txt > nul
+
+if errorlevel 1 (
+    uwfmgr filter enable
+)
+
+pause
 endlocal
+cls
+goto :filterMenu
+
+:exit
+exit
