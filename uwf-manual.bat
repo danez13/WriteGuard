@@ -30,7 +30,7 @@ if '%errorlevel%' NEQ '0' (
 :--------------------------------------
 
 :start
-uwfmgr get-config > config.txt
+if exist "%WINDIR%\system32\uwfmgr" START uwfmgr get-config > config.txt else echo > config.txt
 setlocal EnableDelayedExpansion
 choice /C FX /M "Do you want to see the filter menu, or exit?"
 if %errorlevel% equ 1 (
@@ -43,10 +43,12 @@ if %errorlevel% equ 2 (
 endlocal
 
 :filterMenu
-choice /C EDRB /M "Do you want to Enable UWF, Disable UWF, or return back to the start menu?"
+choice /C EDB /M "Do you want to Enable UWF, Disable UWF, or return back to the start menu?"
 if %errorlevel% equ 1 (
-    findstr /C:"Filter state:     ON" config.txt > nul
-    if %errorlevel% equ 1 (
+    findstr /C:"Filter state:     ON" config.txt > temp.txt
+    set size=0
+    for /f %%i in ("config.txt") do set size=%%~zi
+    if %size% gtr equ 0 (
         uwfmgr filter enable
         pause
         cls
@@ -64,13 +66,7 @@ if %errorlevel% equ 2 (
         goto :start
     )
 )
-if errorlevel 3 (
-    uwfmgr filter Reset-Settings
-    pause
-    cls
-    goto :start
-)
-if %errorlevel% equ 4 (
+if %errorlevel% equ 3 (
     cls
     goto :start
 )
