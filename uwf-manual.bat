@@ -36,7 +36,7 @@ if exist "%WINDIR%\system32\uwfmgr.exe" (
     break > config.txt
 )
 setlocal EnableDelayedExpansion
-choice /C FVEX /M "Do you want to see the filter menu, volume menu, File Exclusion menu, or exit?"
+choice /C FVEX /M "Do you want to see the filter menu (F), volume menu (V), File Exclusion menu (E), or exit (X)?"
 if %errorlevel% equ 1 (
     cls
     goto :filterMenu
@@ -55,7 +55,7 @@ if %errorlevel% equ 4 (
 endlocal
 
 :filterMenu
-choice /C EDRB /M "Do you want to Enable UWF, Disable UWF, Reboot, or return back to the start menu?"
+choice /C EDRB /M "Do you want to Enable UWF (E), Disable UWF (D), Reboot (R), or return back to the start menu (B)?"
 if %errorlevel% equ 1 (
     findstr /C:"Filter state:     ON" config.txt > temp.txt
     if errorlevel 1 (
@@ -64,7 +64,7 @@ if %errorlevel% equ 1 (
         cls
         goto :filterMenu
     ) else (
-        goto :EnableClient-Features
+        goto :EnableFeatures
     )
 )
 if %errorlevel% equ 2 (
@@ -87,7 +87,7 @@ if %errorlevel% equ 4 (
 )
 
 :volumeMenu
-choice /C PUSRB /M "Do you want to protect a volume, unprotect a volume, view volume config, reboot, or go back to the start menu?"
+choice /C PUDRB /M "Do you want to protect a volume (P), unprotect a volume (U), view volume details (D), reboot (R), or go back to the start menu (B)?"
 if %errorlevel% equ 1 ( 
     goto :protect
 )
@@ -105,7 +105,7 @@ if %errorlevel% equ 3 (
 )
 if %errorlevel% equ 4 (
     cls
-    shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
+    shutdown /r /t 5 /c "Reconfiguring Volumes.exe" /f /d p:4:1
     goto :exit
 )
 if %errorlevel% equ 5 (
@@ -114,23 +114,32 @@ if %errorlevel% equ 5 (
 )
 
 :fileMenu
-choice /C GB /M "do you want to Get volume exclusions, or go back to the start Menu"
+choice /C GAKRB /M "do you want to Get volume exclusions (G), Add an exclusion (A), remove and exclusion (K),reboot (R), or go back to the start Menu (B)"
 if %errorlevel% equ 1 (
     goto :getExclusions
 )
 if %errorlevel% equ 2 (
+    goto :addExclusions
+)
+if %errorlevel% equ 3 (
+    goto :removeExclusions
+)
+if %errorlevel% equ 4 (
+    shutdown /r /t 5 /c "Reconfiguring Exclusions.exe" /f /d p:4:1
+)
+if %errorlevel% equ 5 (
     cls
     goto :start
 )
 
-:EnableClient-Features
-choice /C YN /M "are you sure you want to enable UWF?"
-if %errorlevel% equ 1 (
-    goto :EnableFeatures 
-) else (
-    cls
-    goto :filterMenu
-)
+@REM :EnableClient-Features
+@REM choice /C YN /M "are you sure you want to enable UWF (Y or N)?"
+@REM if %errorlevel% equ 1 (
+@REM     goto :EnableFeatures 
+@REM ) else (
+@REM     cls
+@REM     goto :filterMenu
+@REM )
 
 :EnableFeatures
 setlocal
@@ -194,24 +203,60 @@ if exist %drive%:\ (
     goto :volumeMenu
 )
 
-@REM :displayvolumes
-@REM choice /C 1A /M "do you want to display one or all volumes"
-@REM if %errorlevel% equ 1 (
-
-@REM )
-@REM if %errorlevel% equ 2 (
-
-@REM )
+:displayvolumes
+choice /C 1A /M "do you want to display one (1) or all volumes (A)"
+if %errorlevel% equ 1 (
+    powershell -command "Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{Name='Size(GB)';Expression={[math]::round($_.Used/1GB,2)}}, @{Name='Free Space(GB)';Expression={[math]::round($_.Free/1GB,2)}}"
+    set /p drive="Enter the drive letter (e.g., C): "
+    if exist %drive%:\ (
+        uwfmgr volume Get-Config %drive%:
+        pause
+        cls
+        goto :volumeMenu
+    )
+)
+if %errorlevel% equ 2 (
+    uwfmgr volume Get-Config all
+    pause
+    cls
+    goto :volumeMenu
+)
 
 :getExclusions
-@REM powershell -command "Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{Name='Size(GB)';Expression={[math]::round($_.Used/1GB,2)}}, @{Name='Free Space(GB)';Expression={[math]::round($_.Free/1GB,2)}}"
-@REM set /p drive="Enter the drive letter (e.g., C): "
-@REM if exist %drive%:\ (
-@REM     uwfmgr file get-Exclusions %drive%:
-@REM     pause
-@REM     cls
-@REM     goto :fileMenu
-@REM )
+powershell -command "Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{Name='Size(GB)';Expression={[math]::round($_.Used/1GB,2)}}, @{Name='Free Space(GB)';Expression={[math]::round($_.Free/1GB,2)}}"
+set /p drive="Enter the drive letter (e.g., C): "
+if exist %drive%:\ (
+    uwfmgr file get-Exclusions %drive%:
+    pause
+    cls
+    goto :fileMenu
+)
+
+:addExclusions
+set /p file="enter path to file (e.g., drive:/path/to/file/file.ext OR drive:/path/to/folder/): "
+if exist %file% (
+    uwfmgr file add-exclusion %file%
+    pause
+    cls
+    goto :fileMenu
+) else (
+    echo file does not exist
+    cls
+    goto :fileMenu
+)
+
+:removeExclusions
+find ":]" config.txt > temp.txt
+set i = 1
+for /f "delims=" %%a in (temp.txt) do (
+    if %i% == 1 (
+        set "var=%%a"
+        goto :stop
+    )
+)
+:stop
+echo %var%
+pause
 
 :exit
 exit
