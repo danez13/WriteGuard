@@ -247,12 +247,13 @@ if exist %file% (
 
 :removeExclusions
 find ":]" config.txt > temp.txt
-set i = 1
+set /A i = 1
 for /f "delims=" %%a in (temp.txt) do (
-    if %i% == 1 (
+    if %i% equ 1 (
         set "var=%%a"
         goto :stop
     )
+    set %i% += 1
 )
 :stop
 echo %var%
