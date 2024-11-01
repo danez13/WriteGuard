@@ -36,7 +36,7 @@ if exist "%WINDIR%\system32\uwfmgr.exe" (
     break > config.txt
 )
 setlocal EnableDelayedExpansion
-choice /C FVEHOX /M "Do you want to see the filter menu (F), volume menu (V), File Exclusion menu (E), Registry Exclusion menu (H), Overlay menu (O), Servicing menu (S), reboot(R), or exit (X)?"
+choice /C FVEHOSRX /M "Do you want to see the filter menu (F), volume menu (V), File Exclusion menu (E), Registry Exclusion menu (H), Overlay menu (O), Servicing menu (S), reboot(R), or exit (X)?"
 if %errorlevel% equ 1 (
     cls
     goto :filterMenu
@@ -59,7 +59,7 @@ if %errorlevel% equ 5 (
 )
 if %errorlevel% equ 6 (
     cls
-    goto :overlayMenu
+    goto :servicingMenu
 )
 if %errorlevel% equ 7 (
     choice /C YN /M "are you sure you want to enable UWF (Y or N)?"
@@ -215,7 +215,7 @@ if %errorlevel% equ 7 (
 )
 
 :overlayMenu
-choice /C GACSTWLPOIRB /M  "do you want to get overlay config (G), get available space for overlay (A), get overlay consumption (C), set maximum overlay size (S), set storage Type (T), set warning size (W), set critical size (L), turn on/off freespace passthrough (P), turn on/off persistent overlay (O), turn on/off reset persistent overlay (I), reboot(R), go back to start(B)"
+choice /C GACSTWLPOIRB /M "do you want to get overlay config (G), space for overlay (A), overlay consumption (C), max size (S), storage Type (T), warning size (W), critical size (L), on/off passthrough (P), persistent (O), reset persistent (I), reboot (R), go back to start (B)"
 if %errorlevel% equ 1 (
     goto :getOverlayConfig
 )
@@ -327,15 +327,24 @@ cls
 goto :filterMenu
 
 :protect
-powershell -command "Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{Name='Size(GB)';Expression={[math]::round($_.Used/1GB,2)}}, @{Name='Free Space(GB)';Expression={[math]::round($_.Free/1GB,2)}}"
-set /p drive="Enter the drive letter (e.g., C): "
-if exist %drive%:\ (
-    uwfmgr volume protect %drive%:
-    pause
-    cls
-    goto :volumeMenu
-) else (
-    echo The drive %drive%: does not exist.
+choice /C 1A /M "do you want to protect one (1) or all volumes (A)"
+if %errorlevel% equ 1 (
+    powershell -command "Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{Name='Size(GB)';Expression={[math]::round($_.Used/1GB,2)}}, @{Name='Free Space(GB)';Expression={[math]::round($_.Free/1GB,2)}}"
+    set /p drive="Enter the drive letter (e.g., C): "
+    if exist %drive%:\ (
+        uwfmgr volume protect %drive%:
+        pause
+        cls
+        goto :volumeMenu
+    ) else (
+        echo The drive %drive%: does not exist.
+        pause
+        cls
+        goto :volumeMenu
+    )
+)
+if %errorlevel% equ 2 (
+    uwfmgr volume protect all
     pause
     cls
     goto :volumeMenu
