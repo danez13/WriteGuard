@@ -100,7 +100,7 @@ if %errorlevel% equ 2 (
     )
 )
 if %errorlevel% equ 3 (
-    choice /C YN /M "are you sure you want to enable UWF (Y or N)?"
+    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
     if %errorlevel% equ 1 (
         cls
         shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
@@ -116,7 +116,7 @@ if %errorlevel% equ 4 (
 )
 
 :volumeMenu
-choice /C PUDRB /M "Do you want to protect a volume (P), unprotect a volume (U), view volume details (D), reboot (R), or go back to the start menu (B)?"
+choice /C PUDRB /M "Do you want to protect a volume (P), unprotect a volume (U), view volume config (D), reboot (R), or go back to the start menu (B)?"
 if %errorlevel% equ 1 ( 
     goto :protect
 )
@@ -133,7 +133,7 @@ if %errorlevel% equ 3 (
     ) 
 )
 if %errorlevel% equ 4 (
-    choice /C YN /M "are you sure you want to enable UWF (Y or N)?"
+    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
     if %errorlevel% equ 1 (
         cls
         shutdown /r /t 5 /c "Reconfiguring Volumes" /f /d p:4:1
@@ -166,7 +166,7 @@ if %errorlevel% equ 5 (
     goto :commitDeleteFile
 )
 if %errorlevel% equ 6 (
-    choice /C YN /M "are you sure you want to enable UWF (Y or N)?"
+    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
     if %errorlevel% equ 1 (
         cls
         shutdown /r /t 5 /c "Reconfiguring files" /f /d p:4:1
@@ -199,7 +199,7 @@ if %errorlevel% equ 5 (
     goto :commitDeleteRegistry
 )
 if %errorlevel% equ 6 (
-    choice /C YN /M "are you sure you want to enable UWF (Y or N)?"
+    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
     if %errorlevel% equ 1 (
         cls
         shutdown /r /t 5 /c "Reconfiguring Registrys" /f /d p:4:1
@@ -247,7 +247,7 @@ if %errorlevel% equ 10 (
     goto :resetPersistent
 )
 if %errorlevel% equ 11 (
-    choice /C YN /M "are you sure you want to enable UWF (Y or N)?"
+    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
     if %errorlevel% equ 1 (
         cls
         shutdown /r /t 5 /c "Reconfiguring overlays" /f /d p:4:1
@@ -277,7 +277,7 @@ if %errorlevel% equ 4 (
     goto :updateWindows
 )
 if %errorlevel% equ 5 (
-    choice /C YN /M "are you sure you want to enable UWF (Y or N)?"
+    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
     if %errorlevel% equ 1 (
         cls
         shutdown /r /t 5 /c "Reconfiguring servicing" /f /d p:4:1
@@ -569,13 +569,13 @@ goto :overlayMenu
 :setType
 choice /C RD /M "set overlay storage type to RAM (R) or Disk (D)"
 if %errorlevel% equ 1 (
-    uwfmgr set-type RAM
+    uwfmgr set-type 0
     pause
     cls
     goto :overlayMenu
 )
 if %errorlevel% equ 2 (
-    uwfmgr set-type DISK
+    uwfmgr set-type 1
     pause
     cls
     goto :overlayMenu
