@@ -655,4 +655,6 @@ goto :servicingMenu
 
 
 :exit
+del config.txt
+del temp.txt
 exit
