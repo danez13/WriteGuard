@@ -80,24 +80,21 @@ endlocal
 :filterMenu
 choice /C EDRB /M "Do you want to Enable UWF (E), Disable UWF (D), Reboot (R), or return back to the start menu (B)?"
 if %errorlevel% equ 1 (
-    findstr /C:"Filter state:     ON" config.txt > temp.txt
-    if errorlevel 1 (
+    findstr /C:"Filter state:     ON" config.txt > nul
+    if %errorlevel% equ 1 (
+        goto :EnableFeatures
+    ) else (
         uwfmgr filter enable
         pause
         cls
         goto :filterMenu
-    ) else (
-        goto :EnableFeatures
     )
 )
 if %errorlevel% equ 2 (
-    findstr /C:"Filter state:     OFF" config.txt > nul
-    if errorlevel 1 (
-        uwfmgr filter disable
-        pause
-        cls
-        goto :filterMenu
-    )
+    uwfmgr filter disable
+    pause
+    cls
+    goto :filterMenu
 )
 if %errorlevel% equ 3 (
     choice /C YN /M "are you sure you want to restart the system (Y or N)?"
