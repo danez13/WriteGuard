@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Overlay Settings - WriteGuard Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Overlay Settings";
+        var mkdocs_page_input_path = "menus\\overlay.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../..">
+          <img src="../../assets/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Menus</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../filter/">Filter Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../volume/">Volume Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../file/">File Exclusions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../registry/">Registry Exclusions</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Overlay Settings</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#accessing-the-overlay-menu">Accessing the Overlay Menu</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#options">Options</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get-overlay-config-g">Get Overlay Config: G</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-available-space-a">Get Available Space: A</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-consumption-c">Get Consumption: C</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#set-size-s">Set Size: S</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#set-storage-type-t">Set Storage Type: T</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#set-warning-threshold-w">Set Warning Threshold: W</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#set-critical-threshold-l">Set Critical Threshold: L</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#toggle-free-space-passthrough-p">Toggle Free Space Passthrough: P</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#toggle-persistent-overlay-o">Toggle Persistent Overlay: O</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reset-persistent-overlay-i">Reset Persistent Overlay: I</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reboot-r">Reboot: R</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#return-to-main-menu-b">Return to Main Menu: B</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../servicing/">Servicing Mode</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">WriteGuard Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Menus</li>
+      <li class="breadcrumb-item active">Overlay Settings</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="overlay-settings-menu">Overlay Settings Menu</h1>
+<p>The <strong>Overlay Menu</strong> in WriteGuard allows you to view and configure how UWF stores temporary changes. The overlay can be stored in RAM or on disk and has configurable thresholds.</p>
+<hr />
+<h2 id="accessing-the-overlay-menu">Accessing the Overlay Menu</h2>
+<p>From the main menu of <code>writeguard.bat</code>, press <code>O</code>.</p>
+<hr />
+<h2 id="options">Options</h2>
+<h3 id="get-overlay-config-g">Get Overlay Config: <code>G</code></h3>
+<p>Displays the current UWF overlay configuration, including storage type, size, and thresholds.</p>
+<h3 id="get-available-space-a">Get Available Space: <code>A</code></h3>
+<p>Shows how much space is left in the UWF overlay.</p>
+<h3 id="get-consumption-c">Get Consumption: <code>C</code></h3>
+<p>Displays current overlay usage.</p>
+<h3 id="set-size-s">Set Size: <code>S</code></h3>
+<p>Sets the maximum size of the overlay in <strong>megabytes (MB)</strong>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the overlay fills up, the system may become unresponsive.</p>
+</div>
+<h3 id="set-storage-type-t">Set Storage Type: <code>T</code></h3>
+<p>Choose where the overlay is stored:
+- <code>RAM</code>: Faster, but limited size.
+- <code>Disk</code>: Slower, but allows more space.</p>
+<h3 id="set-warning-threshold-w">Set Warning Threshold: <code>W</code></h3>
+<p>Sets a warning level for overlay usage. A notification can be triggered when this threshold is reached.</p>
+<h3 id="set-critical-threshold-l">Set Critical Threshold: <code>L</code></h3>
+<p>Sets a critical limit for overlay usage. Reaching this may result in system instability.</p>
+<h3 id="toggle-free-space-passthrough-p">Toggle Free Space Passthrough: <code>P</code></h3>
+<p>Controls whether UWF reports actual or overlay-limited free space.</p>
+<ul>
+<li><code>ON</code>: Shows full drive space (including overlay).</li>
+<li><code>OFF</code>: Shows only what's available in overlay.</li>
+</ul>
+<h3 id="toggle-persistent-overlay-o">Toggle Persistent Overlay: <code>O</code></h3>
+<p>When enabled, overlay data persists across reboots. Useful for testing.</p>
+<h3 id="reset-persistent-overlay-i">Reset Persistent Overlay: <code>I</code></h3>
+<p>Clears the persistent overlay state.</p>
+<h3 id="reboot-r">Reboot: <code>R</code></h3>
+<p>Reboots the system to apply overlay changes.</p>
+<h3 id="return-to-main-menu-b">Return to Main Menu: <code>B</code></h3>
+<p>Returns to the main menu.</p>
+<hr />
+<h2 id="notes">Notes</h2>
+<ul>
+<li><strong>Overlay space</strong> is where temporary changes are stored while UWF is active.</li>
+<li>Keeping an eye on <strong>consumption</strong> and <strong>thresholds</strong> helps prevent crashes.</li>
+<li>Use <strong>persistent overlays</strong> carefully — they may give a false sense of data being saved.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../registry/" class="btn btn-neutral float-left" title="Registry Exclusions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../servicing/" class="btn btn-neutral float-right" title="Servicing Mode">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../registry/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../servicing/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

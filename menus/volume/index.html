@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Volume Management - WriteGuard Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Volume Management";
+        var mkdocs_page_input_path = "menus\\volume.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../..">
+          <img src="../../assets/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Menus</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../filter/">Filter Management</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Volume Management</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#accessing-the-volume-menu">Accessing the Volume Menu</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#options">Options</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#protect-volume-p">Protect Volume: P</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#unprotect-volume-u">Unprotect Volume: U</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#view-volume-config-d">View Volume Config: D</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reboot-r">Reboot: R</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#return-to-main-menu-b">Return to Main Menu: B</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../file/">File Exclusions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../registry/">Registry Exclusions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../overlay/">Overlay Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../servicing/">Servicing Mode</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">WriteGuard Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Menus</li>
+      <li class="breadcrumb-item active">Volume Management</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="volume-management-menu">Volume Management Menu</h1>
+<p>The <strong>Volume Menu</strong> in WriteGuard lets you protect or unprotect specific volumes using the Unified Write Filter (UWF), and view their current configuration.</p>
+<hr />
+<h2 id="accessing-the-volume-menu">Accessing the Volume Menu</h2>
+<p>From the main menu of <code>writeguard.bat</code>, press <code>V</code>.</p>
+<hr />
+<h2 id="options">Options</h2>
+<h3 id="protect-volume-p">Protect Volume: <code>P</code></h3>
+<p>Adds UWF protection to a volume.</p>
+<p>You’ll be prompted to:
+- Press <code>1</code> to protect a <strong>single</strong> volume (recommended)
+- Press <code>A</code> to protect <strong>all</strong> volumes</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Protecting a volume means all changes to it will be discarded after a reboot while UWF is enabled.</p>
+</div>
+<h3 id="unprotect-volume-u">Unprotect Volume: <code>U</code></h3>
+<p>Removes UWF protection from a volume.</p>
+<p>You’ll be prompted to select the drive letter. Once unprotected, changes to that volume will be <strong>persisted</strong>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Unprotecting critical system volumes can make your system vulnerable to unwanted changes.</p>
+</div>
+<h3 id="view-volume-config-d">View Volume Config: <code>D</code></h3>
+<p>Displays UWF configuration for one or all protected volumes:</p>
+<ul>
+<li>Press <code>1</code> to display one volume</li>
+<li>Press <code>A</code> to display all volumes</li>
+</ul>
+<h3 id="reboot-r">Reboot: <code>R</code></h3>
+<p>Restarts the system to apply protection changes.</p>
+<h3 id="return-to-main-menu-b">Return to Main Menu: <code>B</code></h3>
+<p>Returns to the main menu.</p>
+<hr />
+<h2 id="notes">Notes</h2>
+<ul>
+<li>You must enable the filter (<code>F &gt; E</code>) before protecting volumes.</li>
+<li>It’s best to protect only required volumes, such as system or application drives.</li>
+<li>Always reboot after adding or removing volume protection.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../filter/" class="btn btn-neutral float-left" title="Filter Management"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../file/" class="btn btn-neutral float-right" title="File Exclusions">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../filter/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../file/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

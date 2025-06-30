@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Registry Exclusions - WriteGuard Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Registry Exclusions";
+        var mkdocs_page_input_path = "menus\\registry.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../..">
+          <img src="../../assets/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Menus</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../filter/">Filter Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../volume/">Volume Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../file/">File Exclusions</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Registry Exclusions</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#accessing-the-registry-menu">Accessing the Registry Menu</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#options">Options</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get-registry-exclusions-g">Get Registry Exclusions: G</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#add-an-exclusion-a">Add an Exclusion: A</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remove-an-exclusion-k">Remove an Exclusion: K</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reboot-r">Reboot: R</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#return-to-main-menu-b">Return to Main Menu: B</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../overlay/">Overlay Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../servicing/">Servicing Mode</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">WriteGuard Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Menus</li>
+      <li class="breadcrumb-item active">Registry Exclusions</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="registry-exclusions-menu">Registry Exclusions Menu</h1>
+<p>The <strong>Registry Exclusions Menu</strong> in WriteGuard allows you to make registry keys persistent even while UWF is enabled. This is useful for preserving specific system or application settings across reboots.</p>
+<hr />
+<h2 id="accessing-the-registry-menu">Accessing the Registry Menu</h2>
+<p>From the main menu of <code>writeguard.bat</code>, press <code>R</code>.</p>
+<hr />
+<h2 id="options">Options</h2>
+<h3 id="get-registry-exclusions-g">Get Registry Exclusions: <code>G</code></h3>
+<p>Lists all registry keys currently excluded from UWF protection.</p>
+<p>Use this to review what registry changes are persistent.</p>
+<h3 id="add-an-exclusion-a">Add an Exclusion: <code>A</code></h3>
+<p>Adds a registry key to the list of exclusions.</p>
+<p>You’ll be prompted to enter the full registry path, e.g.:</p>
+<pre><code>HKEY_LOCAL_MACHINE\SOFTWARE\MyApp
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be precise, incorrect paths will result in errors or no effect.</p>
+</div>
+<h3 id="remove-an-exclusion-k">Remove an Exclusion: <code>K</code></h3>
+<p>Removes a registry key from the exclusion list.</p>
+<p>You’ll need to enter the same full registry path used during addition.</p>
+<h3 id="reboot-r">Reboot: <code>R</code></h3>
+<p>Reboots the system to apply changes.</p>
+<h3 id="return-to-main-menu-b">Return to Main Menu: <code>B</code></h3>
+<p>Returns to the main menu.</p>
+<hr />
+<h2 id="notes">Notes</h2>
+<ul>
+<li>Only certain registry hives are supported: <code>HKEY_LOCAL_MACHINE</code> and <code>HKEY_CLASSES_ROOT</code>.</li>
+<li>Registry exclusions are powerful — use caution when excluding security- or system-critical keys.</li>
+<li>Registry changes to excluded keys are saved even when UWF is active.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../file/" class="btn btn-neutral float-left" title="File Exclusions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../overlay/" class="btn btn-neutral float-right" title="Overlay Settings">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../file/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../overlay/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
