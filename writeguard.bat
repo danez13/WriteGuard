@@ -62,13 +62,14 @@ if %errorlevel% equ 6 (
     goto :servicingMenu
 )
 if %errorlevel% equ 7 (
-    choice /C YN /M "are you sure you want to enable UWF (Y or N)?"
-    if %errorlevel% equ 1 (
+    choice /C YN /M "Are you sure you want to Reboot (Y or N)?"
+    set choiceError=!errorlevel!
+    if !choiceError! equ 1 (
         cls
         shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
         goto :exit
-    )
-    if %errorlevel% equ 2 (
+    ) else (
+        cls
         goto :start
     )
 )
@@ -97,14 +98,15 @@ if %errorlevel% equ 2 (
     goto :filterMenu
 )
 if %errorlevel% equ 3 (
-    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
-    if %errorlevel% equ 1 (
+    choice /C YN /M "Are you sure you want to Reboot (Y or N)?"
+    set choiceError=!errorlevel!
+    if !choiceError! equ 1 (
         cls
         shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
         goto :exit
-    )
-    if %errorlevel% equ 2 (
-        goto :filterMenu
+    ) else (
+        cls
+        goto :start
     )
 )
 if %errorlevel% equ 4 (
@@ -130,14 +132,15 @@ if %errorlevel% equ 3 (
     ) 
 )
 if %errorlevel% equ 4 (
-    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
-    if %errorlevel% equ 1 (
+    choice /C YN /M "Are you sure you want to Reboot (Y or N)?"
+    set choiceError=!errorlevel!
+    if !choiceError! equ 1 (
         cls
-        shutdown /r /t 5 /c "Reconfiguring Volumes" /f /d p:4:1
+        shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
         goto :exit
-    )
-    if %errorlevel% equ 2 (
-        goto :volumeMenu
+    ) else (
+        cls
+        goto :start
     )
 )
 if %errorlevel% equ 5 (
@@ -163,14 +166,15 @@ if %errorlevel% equ 5 (
     goto :commitDeleteFile
 )
 if %errorlevel% equ 6 (
-    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
-    if %errorlevel% equ 1 (
+    choice /C YN /M "Are you sure you want to Reboot (Y or N)?"
+    set choiceError=!errorlevel!
+    if !choiceError! equ 1 (
         cls
-        shutdown /r /t 5 /c "Reconfiguring files" /f /d p:4:1
+        shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
         goto :exit
-    )
-    if %errorlevel% equ 2 (
-        goto :fileMenu
+    ) else (
+        cls
+        goto :start
     )
 )
 if %errorlevel% equ 7 (
@@ -196,14 +200,15 @@ if %errorlevel% equ 5 (
     goto :commitDeleteRegistry
 )
 if %errorlevel% equ 6 (
-    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
-    if %errorlevel% equ 1 (
+    choice /C YN /M "Are you sure you want to Reboot (Y or N)?"
+    set choiceError=!errorlevel!
+    if !choiceError! equ 1 (
         cls
-        shutdown /r /t 5 /c "Reconfiguring Registrys" /f /d p:4:1
+        shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
         goto :exit
-    )
-    if %errorlevel% equ 2 (
-        goto :registryMenu
+    ) else (
+        cls
+        goto :start
     )
 )
 if %errorlevel% equ 7 (
@@ -244,14 +249,15 @@ if %errorlevel% equ 10 (
     goto :resetPersistent
 )
 if %errorlevel% equ 11 (
-    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
-    if %errorlevel% equ 1 (
+    choice /C YN /M "Are you sure you want to Reboot (Y or N)?"
+    set choiceError=!errorlevel!
+    if !choiceError! equ 1 (
         cls
-        shutdown /r /t 5 /c "Reconfiguring overlays" /f /d p:4:1
+        shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
         goto :exit
-    )
-    if %errorlevel% equ 2 (
-        goto :overlayMenu
+    ) else (
+        cls
+        goto :start
     )
 )
 if %errorlevel% equ 12 (
@@ -274,14 +280,15 @@ if %errorlevel% equ 4 (
     goto :updateWindows
 )
 if %errorlevel% equ 5 (
-    choice /C YN /M "are you sure you want to restart the system (Y or N)?"
-    if %errorlevel% equ 1 (
+    choice /C YN /M "Are you sure you want to Reboot (Y or N)?"
+    set choiceError=!errorlevel!
+    if !choiceError! equ 1 (
         cls
-        shutdown /r /t 5 /c "Reconfiguring servicing" /f /d p:4:1
+        shutdown /r /t 5 /c "Reconfiguring UWF.exe" /f /d p:4:1
         goto :exit
-    )
-    if %errorlevel% equ 2 (
-        goto :servicingMenu
+    ) else (
+        cls
+        goto :start
     )
 )
 if %errorlevel% equ 6 (

@@ -1,0 +1,17 @@
+site_name: WriteGuard Documentation
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Menus:
+    - Filter Management: menus/filter.md
+    - Volume Management: menus/volume.md
+    - File Exclusions: menus/file.md
+    - Registry Exclusions: menus/registry.md
+    - Overlay Settings: menus/overlay.md
+    - Servicing Mode: menus/servicing.md
+theme: 
+  name: readthedocs
+  logo: assets/logo.png
+
+markdown_extensions:
+  - admonition
