@@ -8,7 +8,7 @@ Welcome to **WriteGuard** — a powerful batch script interface for managing the
 
 Download the latest version of **WriteGuard** from our SourceForge page:
 
-- [Download WriteGuard on SourceForge](https://sourceforge.net/projects/your-project-name/files/latest/download)
+<!-- - [Download WriteGuard on SourceForge](https://sourceforge.net/projects/your-project-name/files/latest/download) -->
 - [Download WriteGuard on GitHub](https://github.com/danez13/WriteGuard)
 
 Once downloaded, extract the `.zip` archive to a convenient location on your system.
@@ -79,5 +79,3 @@ To check if UWF is enabled after reboot:
 ## Best Practices
 - **Backup:** Always back up registry keys or files before commiting changes
 - **Use menus carefully:** Avoid unprotecting critical volumes accidentally
----
-For advanced usage, see the full [WriteGuard Documentation](link-to-docs-site).
