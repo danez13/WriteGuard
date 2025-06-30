@@ -60,13 +60,6 @@ Manually setting up UWF with `uwfmgr` commands can be tedious and prone to mista
 
 ---
 
-## License
-
-This tool is released under the MIT License.  
-See the [License page](license.md) for more details.
-
----
-
 ## Author
 
 Created and maintained by **Daniel Hernandez**.  
